@@ -45,7 +45,8 @@ Boots up a new MySQL or MongoDB server.
 #### Using curl
 
 ```bash
-curl -H "Content-Type: application/json" -X POST -d '{"server":{"type":"mysql"}}' http://localhost:9292/servers
+curl -H "Content-Type: application/json" -X POST \
+     -d '{"server":{"type":"mysql"}}' http://localhost:9292/servers
 ```
 
 #### Example Response
@@ -71,9 +72,7 @@ Lists the servers currently available.
 #### Using curl
 
 ```bash
-curl -H "Content-Type: application/json" -
-curl https://{subdomain}.zendesk.com/api/v2/activities.json \
-  -v -u {email_address}:{password}
+curl http://localhost:9292/servers
 ```
 
 #### Example Response
@@ -93,7 +92,7 @@ curl https://{subdomain}.zendesk.com/api/v2/activities.json \
       "id": 2,
       "port": 33212,
       "up": true,
-      type": "mysql"
+      "type": "mysql"
     }
   ]
 }
@@ -127,7 +126,8 @@ All of the parameters `up`, `rw` and `master_id` are optional.
 #### Using curl
 
 ```bash
-curl -H "Content-Type: application/json" -X PUT -d '{"server":{"up":false}}' http://localhost:9292/servers/2
+curl -H "Content-Type: application/json" -X PUT \
+     -d '{"server":{"up":false}}' http://localhost:9292/servers/2
 ```
 
 #### Example Response
