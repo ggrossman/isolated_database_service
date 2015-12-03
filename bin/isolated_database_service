@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.dirname(__FILE__) + "/../lib"
+require 'rubygems'
+require 'isolated_database_service'
+require 'getoptlong'
+
+opts = GetoptLong.new(
+  [ '--port', '-p', GetoptLong::OPTIONAL_ARGUMENT ]
+)
+
+options = { port: 9000 }
+opts.each do |opt, arg|
+  case opt
+    when '--port'
+      options[:port] = arg.to_i
+    end
+end
+
+IsolatedDatabaseService::Application.set :port, options[:port]
+IsolatedDatabaseService::Application.run!

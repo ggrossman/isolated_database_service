@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'sinatra/json'
+require 'rack/parser'
+require 'json'
 require 'isolated_server'
 require 'isolated_server/mysql'
 require 'isolated_server/mongodb'
@@ -35,6 +37,8 @@ module IsolatedDatabaseService
   end
 
   class Application < Sinatra::Base
+    use Rack::Parser, :parsers => { 'application/json' => Proc.new { |data| JSON.parse data } }
+
     set :servers, ServerList.new
 
     post '/servers' do
@@ -128,5 +132,7 @@ module IsolatedDatabaseService
       end
       {id: id, port: server.port, up: server.up?, type: server_type}
     end
+
+    run! if app_file == $0
   end
 end
