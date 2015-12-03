@@ -1,5 +1,7 @@
 # isolated_service
 
+[![Build Status](https://travis-ci.org/ggrossman/isolated_service.png)](https://travis-ci.org/ggrossman/isolated_service)
+
 Microservice wrapper for [isolated_server](https://github.com/gabetax/isolated_server)
 
 [isolated_server](https://github.com/gabetax/isolated_server) lets you easily bring up and down clusters of
