@@ -22,6 +22,15 @@ class ServerList
   def delete_server(id)
     @servers.delete(id)
   end
+
+  def count
+    @servers.length
+  end
+
+  def clear
+    @servers = {}
+    @next_id = 1
+  end
 end
 
 class IsolatedService < Sinatra::Base
@@ -53,21 +62,21 @@ class IsolatedService < Sinatra::Base
   put '/servers/:id' do
     halt(400) unless params[:server]
 
-    unless params[:server][:up].nil?
-      if params[:server][:up]
+    up = parse_boolean(params[:server][:up])
+    unless up.nil?
+      if up
         server.up!
       else
         server.down!
       end
     end
 
-    unless params[:server][:rw].nil?
-      server.set_rw(params[:server][:rw])
-    end
+    rw = parse_boolean(params[:server][:rw])
+    server.set_rw(rw) unless rw.nil?
 
     master_id = params[:server][:master_id]
     unless master_id.nil?
-      master_server = servers.servers[master_id] || halt(400)
+      master_server = servers.servers[master_id.to_i] || halt(400)
       server.make_slave_of(master_server)
     end
 
@@ -88,6 +97,24 @@ class IsolatedService < Sinatra::Base
 
   def server
     @server ||= servers.servers[params[:id].to_i] || halt(404)
+  end
+
+  def parse_boolean(value)
+    if truthy?(value)
+      true
+    elsif falsy?(value)
+      false
+    else
+      nil
+    end
+  end
+
+  def truthy?(value)
+    ['true', 't', '1', 'yes', true].include?(value)
+  end
+
+  def falsy?(value)
+    ['false', 'f', '0', 'no', false].include?(value)
   end
 
   def present_server(id, server)
