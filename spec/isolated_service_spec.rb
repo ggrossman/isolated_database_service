@@ -3,7 +3,6 @@ require File.expand_path '../spec_helper.rb', __FILE__
 describe IsolatedService do
   before do
     allow_any_instance_of(IsolatedServer::Mysql).to receive(:boot!).and_return(true)
-    allow_any_instance_of(IsolatedServer::Mysql).to receive(:port).and_return(5000)
   end
 
   describe "GET /servers" do
@@ -37,6 +36,7 @@ describe IsolatedService do
   describe "PUT /servers/:id" do
     before do
       @server = double()
+      allow(@server).to receive(:port).and_return(5000)
       @id = app().servers.add_server(@server)
     end
 
