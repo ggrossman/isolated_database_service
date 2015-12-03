@@ -2,6 +2,11 @@ PATH
   remote: .
   specs:
     isolated_database_service (0.0.2)
+      isolated_server
+      mysql2
+      rack-parser
+      sinatra
+      sinatra-contrib
 
 GEM
   remote: https://rubygems.org/

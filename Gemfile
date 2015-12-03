@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'bump'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'rack-parser', :require => 'rack/parser'
