@@ -51,6 +51,7 @@ PLATFORMS
 
 DEPENDENCIES
   bump
+  bundler
   isolated_server
   isolated_service!
   mysql2
