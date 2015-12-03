@@ -7,7 +7,7 @@ module RSpecMixin
   include Rack::Test::Methods
 
   def app()
-    IsolatedService
+    IsolatedService::Application
   end
 end
 

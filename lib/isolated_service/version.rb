@@ -1,5 +1,3 @@
-require 'sinatra'
-
-class IsolatedService < Sinatra::Base 
+module IsolatedService
   VERSION = "0.0.1"
 end

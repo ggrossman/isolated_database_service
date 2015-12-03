@@ -5,4 +5,4 @@ require 'json'
 
 use Rack::Parser, :parsers => { 'application/json' => Proc.new { |data| JSON.parse data } }
 
-run IsolatedService
+run IsolatedService::Application
