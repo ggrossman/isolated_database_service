@@ -37,6 +37,7 @@ describe IsolatedService do
     before do
       @server = double()
       allow(@server).to receive(:port).and_return(5000)
+      allow(@server).to receive(:up?).and_return(true)
       @id = app().servers.add_server(@server)
     end
 
