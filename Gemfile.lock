@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    isolated_service (0.0.1)
+    isolated_database_service (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -52,8 +52,8 @@ PLATFORMS
 DEPENDENCIES
   bump
   bundler
+  isolated_database_service!
   isolated_server
-  isolated_service!
   mysql2
   rack-parser
   rake

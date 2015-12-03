@@ -1,6 +1,6 @@
 require File.expand_path '../spec_helper.rb', __FILE__
 
-describe IsolatedService do
+describe IsolatedDatabaseService do
   before do
     allow_any_instance_of(IsolatedServer::Mysql).to receive(:boot!).and_return(true)
   end

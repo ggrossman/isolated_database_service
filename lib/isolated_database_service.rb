@@ -4,7 +4,7 @@ require 'isolated_server'
 require 'isolated_server/mysql'
 require 'isolated_server/mongodb'
 
-module IsolatedService
+module IsolatedDatabaseService
   class ServerList
     attr_accessor :next_id, :servers
 

@@ -1,6 +1,6 @@
-# isolated_service
+# isolated_database_service
 
-[![Build Status](https://travis-ci.org/ggrossman/isolated_service.png)](https://travis-ci.org/ggrossman/isolated_service)
+[![Build Status](https://travis-ci.org/ggrossman/isolated_database_service.png)](https://travis-ci.org/ggrossman/isolated_database_service)
 
 Microservice wrapper for [isolated_server](https://github.com/gabetax/isolated_server)
 
@@ -13,16 +13,16 @@ simple JSON REST API for it, making it language-agnostic and callable from Java,
 
 ## Running
 
-The script `boot_isolated_service` can be used to start the service:
+The script `boot_isolated_database_service` can be used to start the service:
 
 ```bash
-bin/boot_isolated_service
+bin/boot_isolated_database_service
 ```
 
 Pass the `-p` argument to configure the listen port, or Sinatra's default is used.
 
 ```bash
-bin/boot_isolated_service -p 9000
+bin/boot_isolated_database_service -p 9000
 ```
 
 ## JSON API

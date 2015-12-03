@@ -1,5 +1,5 @@
 require 'rack/test'
-require 'isolated_service'
+require 'isolated_database_service'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -7,7 +7,7 @@ module RSpecMixin
   include Rack::Test::Methods
 
   def app()
-    IsolatedService::Application
+    IsolatedDatabaseService::Application
   end
 end
 
