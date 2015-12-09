@@ -164,3 +164,49 @@ curl -X DELETE http://localhost:9292/servers/2
 ```http
 204 No Content
 ```
+
+### Boot MySQL Cluster
+`POST /mysql-clusters`
+
+Creates a cluster of MySQL servers with a master, a slave and a chained slave server, with replication established.
+
+The optional `initial_sql` property contains an array of SQL statements to execute on the master server before establishing replication.
+
+#### Using curl
+
+```bash
+curl -H "Content-Type: application/json" \
+     -d '{"cluster":{"initial_sql":[
+            "CREATE TABLE test.foo (id INT, value INT)"
+            "INSERT INTO test.foo VALUES (1, 2)"]}}' \
+     -X POST http://localhost:9000/mysql-clusters
+```
+
+#### Example Response
+
+```http
+200 OK
+
+{
+  "cluster": {
+    "master": { 
+      "id": 1,
+      "port": 57959,
+      "up": true,
+      "type": "mysql"
+    },
+    "slave": {
+      "id": 2,
+      "port": 27702,
+      "up": true,
+      "type": "mysql"
+    },
+    "slave_2": {
+      "id": 3,
+      "port": 51111,
+      "up": true,
+      "type": "mysql"
+    }
+  }
+}
+```
