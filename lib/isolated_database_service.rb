@@ -5,6 +5,7 @@ require 'json'
 require 'isolated_server'
 require 'isolated_server/mysql'
 require 'isolated_server/mongodb'
+require 'isolated_database_service/boot_mysql_cluster'
 
 module IsolatedDatabaseService
   class ServerList
@@ -58,6 +59,24 @@ module IsolatedDatabaseService
       new_server.boot!
       status 201
       json :server => present_server(id, new_server)
+    end
+
+    post '/mysql-clusters' do
+      halt(400) unless params[:cluster]
+
+      initial_sql = params[:cluster][:initial_sql] || []
+      mysql_master, mysql_slave, mysql_slave_2 = BootMysqlCluster::boot!(initial_sql)
+
+      mysql_master_id = servers.add_server(mysql_master)
+      mysql_slave_id = servers.add_server(mysql_slave)
+      mysql_slave_2_id = servers.add_server(mysql_slave_2)
+
+      status 201
+      json :cluster => {
+        master: present_server(mysql_master_id, mysql_master),
+        slave: present_server(mysql_slave_id, mysql_slave),
+        slave_2: present_server(mysql_slave_2_id, mysql_slave_2),
+      }
     end
 
     get '/servers' do
