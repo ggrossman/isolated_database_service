@@ -87,12 +87,8 @@ module IsolatedDatabaseService
       halt(400) unless params[:server]
 
       up = parse_boolean(params[:server][:up])
-      unless up.nil?
-        if up
-          server.up!
-        else
-          server.down!
-        end
+      if !up.nil? && up != server.up?
+        up ? server.up! : server.down!
       end
 
       rw = parse_boolean(params[:server][:rw])

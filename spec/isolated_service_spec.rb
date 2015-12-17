@@ -42,12 +42,26 @@ describe IsolatedDatabaseService do
     end
 
     it "should bring up a server" do
+      expect(@server).to receive(:up?).and_return(false)
       expect(@server).to receive(:up!).and_return(true)
       put "/servers/#{@id}", {server: {up: true}}
     end
 
+    it "should do nothing if server already up" do
+      expect(@server).to receive(:up?).and_return(true)
+      expect(@server).not_to receive(:up!)
+      put "/servers/#{@id}", {server: {up: true}}
+    end
+
     it "should bring down a server" do
+      expect(@server).to receive(:up?).and_return(true)
       expect(@server).to receive(:down!).and_return(true)
+      put "/servers/#{@id}", {server: {up: false}}
+    end
+
+    it "should do nothing if server already down" do
+      expect(@server).to receive(:up?).and_return(false)
+      expect(@server).not_to receive(:down!)
       put "/servers/#{@id}", {server: {up: false}}
     end
 
