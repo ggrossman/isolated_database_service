@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    isolated_database_service (0.0.4)
+    isolated_database_service (0.0.5)
       isolated_server
       mysql2
       rack-parser
