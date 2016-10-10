@@ -177,7 +177,8 @@ The optional `initial_sql` property contains an array of SQL statements to execu
 ```bash
 curl -H "Content-Type: application/json" \
      -d '{"cluster":{"initial_sql":[
-            "CREATE TABLE test.foo (id INT, value INT)"
+            "CREATE DATABASE test", \
+            "CREATE TABLE test.foo (id INT, value INT)", \
             "INSERT INTO test.foo VALUES (1, 2)"]}}' \
      -X POST http://localhost:9000/mysql-clusters
 ```
